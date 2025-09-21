@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:15
+    container_name: strata_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    build:
+      context: ./api
+    container_name: strata_api
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./api:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./api/.env
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
