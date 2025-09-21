@@ -1,0 +1,22 @@
+{
+  "name": "Strata Django API",
+  "build": {
+    "context": "../api",
+    "dockerfile": "../api/Dockerfile"
+  },
+  "workspaceFolder": "/app",
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python"
+      }
+    }
+  },
+
+  "forwardPorts": [8000],
+  "remoteUser": "root"
+}
